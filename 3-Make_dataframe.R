@@ -7,11 +7,11 @@ library(tidyr)
 source('1-Function.R')
 
 ########## Build up the data with phenotype (W) scale
-### Model 1 - Model 3 with different parameter 
+### Model 1 - Model 2 with different parameter 
 All_model_phe<-list()
 data_save<-list()
 data_save_x<-list()
-for (m in 1:3) {
+for (m in 1:2) {
   for (i in 1:4) {
     for (k in 1:4) {
       # Build up a data frame with relative single mutant phenotypes after nonlinear transformation and normalized to corresponding wild-type phenotype
@@ -81,11 +81,11 @@ for (m in 1:3) {
 save(All_model_phe, file = "All_model_phe.Rdata")
 
 ########## Build up data with free energy change (ddG) scale
-###Model 1 - Model 3 with different parameter
+###Model 1 - Model 2 with different parameter
 All_model_ddG<-list()
 data_save<-list()
 data_save_x<-list()
-for (m in 1:3) {
+for (m in 1:2) {
   for (i in 1:4) {
     # Build up the data frame with free energy changes, ddGF for Folding mutant, ddGB for Binding mutant
     data_1<-expand.grid(ddGF=seq(-2,13, by=0.125), ddGB=0) #61(by=0.25), 76(by=0.2), 121(by=0.125) points
@@ -148,7 +148,7 @@ All_model<-list(Phe_scale=All_model_phe,ddG_scale=All_model_ddG,
                 Phe_scale_heatmap=All_model_phe,ddG_scale_heatmap=All_model_ddG)
 
 for (a in 1:4) {
-  for (m in 1:3) {
+  for (m in 1:2) {
     for (i in 1:4) {
       for (k in 1:4) {
         # Modify the content of 'Mutant type'
@@ -164,7 +164,7 @@ for (a in 1:4) {
 }
 
 for (a in 3:4) {
-  for (m in 1:3) {
+  for (m in 1:2) {
     for (i in 1:4) {
       for (k in 1:4) {
         # Convert form of data frame
@@ -210,7 +210,7 @@ for (a in 3:4) {
 
 
 for (a in 1:2) {
-  for (m in 1:3) {
+  for (m in 1:2) {
     for (i in 1:4) {
       for (k in 1:4) {
         ### Modify the data for facilitating scatter plot Expected vs. Observed
@@ -245,7 +245,7 @@ for (a in 1:2) {
 
 ### Modify the column name
 for (a in c(2,4)) {
-  for (m in 1:3) {
+  for (m in 1:2) {
     for (i in 1:4) {
       for (k in 1:4) {
         data_save<-list(All_model[[a]][[m]][[i]][[k]][All_model[[a]][[m]][[i]][[k]]$`Mutant type`=="Folding",],
@@ -272,13 +272,10 @@ for (a in 1:4) {
     for (k in 1:4) {
       # Leave only the Folding mutant in Model 1
       All_model[[a]][[1]][[i]][[k]]<-All_model[[a]][[1]][[i]][[k]][All_model[[a]][[1]][[i]][[k]]$`Mutant type`=="Folding",]
-      # Leave only the Binding mutant in Model 4
-      All_model[[a]][[3]][[i]][[k]]<-All_model[[a]][[3]][[i]][[k]][All_model[[a]][[3]][[i]][[k]]$`Mutant type`=="Binding",]
     }
   }
   # Remove the some of uninterested data
   All_model[[a]][[1]][[4]]<-NULL
-  All_model[[a]][[3]]<-All_model[[a]][[3]][[3]]
 }
 
 

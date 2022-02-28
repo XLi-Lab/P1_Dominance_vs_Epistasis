@@ -25,7 +25,7 @@ ggplot(x1) + geom_line(aes(x=ddG1-2, y=Observed),size=1) +
   geom_vline(xintercept = -2,lty=2,col='gray',size=1) + 
   geom_vline(xintercept = -0.5,col='#629CE5',size=1) + theme_pubr() + 
   labs(x="dGFolding (kcal/mol)", y="Folded protein fraction",title="Model 1 Line Plot Mut-Phe")
-ggsave(file='Model 1 Line Plot Mut-Phe.pdf', width = 3.5, height =3.6)
+#ggsave(file='Model 1 Line Plot Mut-Phe.pdf', width = 3.5, height =3.6)
 
 ### Model 1 Folding mutant 2D Heatmap (ddG scale)
 x1<-All_model[[4]][[1]][[2]][[1]]
@@ -64,7 +64,7 @@ a2<-ggplot(x1[x1$DataType!="Between alleles" & x1$DataType!="Within allele", ]) 
   theme(legend.position="right")
 f2<-ggarrange(a1,a2, ncol=1, nrow=2, heights = c(2,1.435))
 ggarrange(f1,f2, ncol=2, nrow=1)
-ggsave(file='Model 1 Heatmap ddG & Phe scale.pdf', width = 11.5, height =11.6)
+#ggsave(file='Model 1 Heatmap ddG & Phe scale.pdf', width = 11.5, height =11.6)
 
 ### Model 1 Scatter plot (Phenotype scale)
 x1<-All_model[[1]][[1]][[2]][[1]]
@@ -75,7 +75,7 @@ ggplot(x1, aes(x=Expected, y=Observed)) +
   facet_grid(title+Exp_Type~Obs_Type) + theme_pubr() + xlim(c(0,1)) + ylim(c(0,1)) +  
   labs(x='Expected (additive)\nphenotype (A.U.)', y='Observed phenotype (A.U.)', title='Model 1 Scatter plot (Phe)')+
   theme(legend.position="right")
-ggsave(file='Model 1 Scatter Plot Exp vs. Obs.pdf',width = 7.2, height =7)
+#ggsave(file='Model 1 Scatter Plot Exp vs. Obs.pdf',width = 7.2, height =7)
 
 ##### Supplementary Figure 2
 
@@ -102,7 +102,7 @@ for (i in 1:2) {
   f1[[i]]<-ggarrange(a1,a2, ncol=1, nrow=2, heights = c(2,1.435))
 }
 ggarrange(f1[[1]],f1[[2]], ncol=2, nrow=1)
-ggsave(file='Model 1 Heatmap with dGF_wt ddG scale.pdf', width = 11.5, height =11.6)
+#ggsave(file='Model 1 Heatmap with dGF_wt ddG scale.pdf', width = 11.5, height =11.6)
 
 ### Model 1 Folding with different stability of wild type (Phenotype)
 x1<-list(All_model[[3]][[1]][[1]][[1]],All_model[[3]][[1]][[3]][[1]])
@@ -124,7 +124,7 @@ for (i in 1:2) {
   f1[[i]]<-ggarrange(a1,a2, ncol=1, nrow=2, heights = c(2,1.435))
 }
 ggarrange(f1[[1]],f1[[2]], ncol=2, nrow=1)
-ggsave(file='Model 1 Heatmap with dGF_wt Phe scale.pdf', width = 11.5, height =11.6)
+#ggsave(file='Model 1 Heatmap with dGF_wt Phe scale.pdf', width = 11.5, height =11.6)
 
 
 ##### Figure 3, for Model 2
@@ -148,7 +148,7 @@ a2<-ggplot(x1[x1$DataType!="Between alleles" & x1$DataType!="Within allele", ]) 
   labs(x="(A) Phenotype (A.U.)", y="", fill="Interaction",title = "") + 
   theme(legend.position="right")
 ggarrange(a1,a2, ncol=1, nrow=2, heights = c(2,1.46))
-ggsave(file='Model 2 Heatmap Phe scale.pdf', width = 9.2, height =11.6)
+#ggsave(file='Model 2 Heatmap Phe scale.pdf', width = 9.2, height =11.6)
 
 ### Model 2 Scatter plot
 x1<-All_model[[1]][[2]][[3]][[1]]
@@ -160,7 +160,7 @@ ggplot(x1, aes(x=Expected, y=Observed, color=`Mutant type`)) +
   facet_grid(title+Exp_Type~Obs_Type) +theme_pubr()+ xlim(c(0,1)) + ylim(c(0,1)) +  
   labs(x='Expected (additive)\nphenotype (A.U.)', y='Observed phenotype (A.U.)', title='Model 2 Scatter plot (Phe)')+
   theme(legend.position="right")
-ggsave(file='Model 2 Scatter Plot Exp vs. Obs.pdf',width = 8, height =6.55)
+#ggsave(file='Model 2 Scatter Plot Exp vs. Obs.pdf',width = 8, height =6.55)
 
 ### Model 2 Interaction comparison Scatter
 x1<-All_model[[1]][[2]][[3]][[1]]
@@ -184,7 +184,7 @@ a2<-ggplot(x1, aes(x=`Between-allele\nInteraction score`, y=`Within-allele\nInte
   stat_cor(method="pearson",digits =3) + facet_wrap(.~`Mutant type`,ncol=1,scales = 'free') + 
   xlim(c(-0.4,0.4)) + ylim(c(-0.4,0.4)) + labs(title='Model 2 (AlleleType vs.)')
 ggarrange(a1,a2, ncol=2, nrow=1)
-ggsave(file='Model 2 Scatter Plot Interaction comparison.pdf',width = 6.35, height =6.35)
+#ggsave(file='Model 2 Scatter Plot Interaction comparison.pdf',width = 6.35, height =6.35)
 
 ### Model 2 Scatter plot with different ligand:protein ratio
 x1<-rbind(All_model[[1]][[2]][[1]][[1]],All_model[[1]][[2]][[2]][[1]],All_model[[1]][[2]][[3]][[1]],All_model[[1]][[2]][[4]][[1]])
@@ -201,7 +201,7 @@ ggplot(x1, aes(x=Expected, y=Observed, color=`Mutant type`)) +
   labs(x='Expected (additive) phenotype (A.U.)', y='Observed phenotype (A.U.)', 
        title='Combining two detrimental mutants')+
   theme(legend.position="right")
-ggsave(file='Model 2 Scatter Plot with L-P ratio.pdf',width = 14, height =12.8)
+#ggsave(file='Model 2 Scatter Plot with L-P ratio.pdf',width = 14, height =12.8)
 
 ### Model 2 Folding and Binding (Phe) with different ligand-protein ratio
 x1<-rbind(All_model[[3]][[2]][[1]][[1]],All_model[[3]][[2]][[2]][[1]],
@@ -226,7 +226,7 @@ a2<-ggplot(x1[x1$DataType=="Between-allele Interaction" | x1$DataType=="Within-a
   labs(x="(A) Phenotype (A.U.)", y="(B) Phenotype (A.U.)", fill="Interaction",title = "") + 
   theme(legend.position="right")
 ggarrange(a1,a2, ncol=1, nrow=2, heights = c(2,1.48))
-ggsave(file='Model 2 Heatmap with L-P ratio Phe scale.pdf', width = 26, height =13.2)
+#ggsave(file='Model 2 Heatmap with L-P ratio Phe scale.pdf', width = 26, height =13.2)
 
 ### Dose-respond curves of Model 2 with different ligand:protein ratio
 x1<-data.frame(pr1=seq(0,2.2,0.025))
@@ -242,7 +242,7 @@ ggplot(x1) + geom_line(aes(x=pr1, y=homo_rel),size=1) +
   geom_abline(slope = 0,intercept = 1,lty=2,col='gray',size=1) + 
   theme_pubr() + facet_grid(.~pr2) + ylim(c(0,1.2)) +  
   labs(x="Functional protein concentration", y="Phenotype (A.U.)",title="Model 2 Dose-respond with L-P ratio")
-ggsave(file='Model 2 Line Plot Dose-respond with L-P ratio.pdf', width = 9.3, height =3.2)
+#ggsave(file='Model 2 Line Plot Dose-respond with L-P ratio.pdf', width = 9.3, height =3.2)
 
 ### Model 2 Line plot proportion bound with Folding and Binding mutant
 x1<-All_model[[5]]
@@ -252,7 +252,7 @@ ggplot(x1, aes(x=ddG, y=`Phenotype (A.U.)`, color=DataType)) +
   scale_color_manual(values = c("gray","black"))+
   facet_grid(type~pr2) + theme_pubr() + 
   labs(x="ddG (kcal/mol)",title="Model 2 Line plot Proportion Bound")
-ggsave(file='Model 2 Line plot Proportion Bound.pdf', width = 8, height =5.2)
+#ggsave(file='Model 2 Line plot Proportion Bound.pdf', width = 8, height =5.2)
 
 
 ##### Supplementary Figure 3
@@ -280,7 +280,7 @@ a2<-ggplot(x1[x1$DataType=="Between-allele Interaction" | x1$DataType=="Within-a
   labs(x="ddG,A (kcal/mol)", y="ddG,B (kcal/mol)", fill="Interaction",title = "") + 
   theme(legend.position="right")
 ggarrange(a1,a2, ncol=1, nrow=2, heights = c(2,1.48))
-ggsave(file='Model 2 Heatmap with L-P ratio ddG scale.pdf', width = 34, height =13.2)
+#ggsave(file='Model 2 Heatmap with L-P ratio ddG scale.pdf', width = 34, height =13.2)
 
 
 ##### Supplementary Figure 4
@@ -307,81 +307,7 @@ f2<-ggplot() +
   scale_alpha_manual(values = c(0.1,0.5,1)) + facet_grid(a2_ddGB+Obs~pr2) +
   theme_pubr() + labs(title="Model 2 Binding mutant")
 ggarrange(f1,f2, ncol=2, nrow=1)
-ggsave(file='Model 2 Proportion Plot Allele Fraction.pdf', width = 15, height =25.3)
-
-
-##### Supplementary Figure 5, for Model 3
-
-### Model 3 Binding (Phenotype scale)
-x1<-All_model[[3]][[3]][[1]]
-x1<-x1[x1$mut1_wt<1 & x1$mut2_wt<1, ]
-a1<-ggplot(x1[x1$DataType=="Between alleles" | x1$DataType=="Within allele", ]) + 
-  geom_tile(aes(x=mut1_wt, y=mut2_wt, fill= Value))+ scale_fill_viridis()+
-  facet_grid(group~DataType) + theme_pubr() + 
-  geom_contour(aes(x=mut1_wt, y=mut2_wt, z=Value, colour=..level..), colour="black", binwidth=0.1) + 
-  labs(x="", y="(B) Phenotype (A.U.)", fill="Phenotype",title='Model 3 Binding (Phe)') + 
-  theme(legend.position="right")
-a2<-ggplot(x1[x1$DataType!="Between alleles" & x1$DataType!="Within allele", ]) + 
-  geom_tile(aes(x=mut1_wt, y=mut2_wt, fill= Value))+ 
-  scale_fill_gradient2(low=scales::muted("blue"), mid="#EEEEEE", high=("hotpink")) + 
-  facet_grid(group~DataType) + theme_pubr() + 
-  geom_contour(aes(x=mut1_wt, y=mut2_wt, z=Value, colour=..level..), colour="black", binwidth=0.1) + 
-  labs(x="(A) Phenotype (A.U.)", y="", fill="Interaction",title = "") + 
-  theme(legend.position="right")
-f1<-ggarrange(a1,a2, ncol=1, nrow=2, heights = c(2,1.46))
-
-### Model 3 Binding (ddG scale)
-x1<-All_model[[4]][[3]][[1]]
-a1<-ggplot(x1[x1$DataType=="Between alleles" | x1$DataType=="Within allele", ]) + 
-  geom_tile(aes(x=ddG1, y=ddG2, fill= Value))+ scale_fill_viridis()+
-  facet_grid(group~DataType) + theme_pubr() +
-  scale_x_reverse()+scale_y_reverse()+
-  geom_contour(aes(x=ddG1, y=ddG2, z=Value, colour=..level..), colour="black", binwidth=0.1) + 
-  labs(x="", y="ddGBinding,B (kcal/mol)", fill="Phenotype",title='Model 3 Binding (ddG)') + 
-  theme(legend.position="right")
-a2<-ggplot(x1[x1$DataType!="Between alleles" & x1$DataType!="Within allele", ]) + 
-  geom_tile(aes(x=ddG1, y=ddG2, fill= Value))+ 
-  scale_fill_gradient2(low=scales::muted("blue"), mid="#EEEEEE", high=("hotpink")) + 
-  facet_grid(group~DataType) + theme_pubr() + 
-  scale_x_reverse()+scale_y_reverse()+
-  geom_contour(aes(x=ddG1, y=ddG2, z=Value, colour=..level..), colour="black", binwidth=0.1) + 
-  labs(x="ddGBinding,A (kcal/mol)", y="", fill="Interaction",title = "") + 
-  theme(legend.position="right")
-f2<-ggarrange(a1,a2, ncol=1, nrow=2, heights = c(2,1.46))
-ggarrange(f1,f2, ncol=2, nrow=1)
-ggsave(file='Model 3 Heatmap Phe & ddG scale.pdf', width = 11.5, height =11.6)
-
-### Model 1 vs. Model 2 vs. Model 3, Interaction comparison
-# Select the data from Model 1 - Model 3
-x1<-list(All_model[[1]][[1]][[2]][[1]],All_model[[1]][[2]][[3]][[1]][All_model[[1]][[2]][[3]][[1]]$`Mutant type`=="Folding",],
-         All_model[[1]][[2]][[3]][[1]][All_model[[1]][[2]][[3]][[1]]$`Mutant type`=="Binding",],All_model[[1]][[3]][[1]])
-# Unify the upper and lower limits of data
-x1[[1]]<-x1[[1]][x1[[1]]$mut1_wt>=0.51 & x1[[1]]$mut1_wt<=1 & x1[[1]]$mut2_wt>=0.51 & x1[[1]]$mut2_wt<=1,]
-for (i in 1:4) {
-  x1[[i]]<-x1[[i]][,9:10] # Only select the Interaction score data
-  x1[[i]]<-gather(x1[[i]],"Type","Value") # Modify its format
-}
-# Merge the data
-x1<-data.frame(Type=x1[[1]]$Type,Model1F=x1[[1]]$Value,Model2F=x1[[2]]$Value,
-               Model2B=x1[[3]]$Value,Model3B=x1[[4]]$Value)
-# Rank the 'Type' of data
-x1$Type<-factor(x1$Type,levels = c("Within-allele\nInteraction score","Between-allele\nInteraction score"))
-a1<-ggplot(x1, aes(x=Model2B, y=Model3B)) + 
-  geom_point(alpha=0.05,shape=1,size=2,col='black')+
-  geom_abline(slope=0, intercept=0, lty=2, size=1, col='#9D9E9A') + 
-  geom_vline(xintercept = 0, lty=2, size=1, col='#9D9E9A')+
-  geom_abline(slope=1, intercept=0, lty=2, size=1, col='#9D9E9A') + 
-  stat_cor(method="pearson",digits =3) + facet_wrap(.~Type,ncol=1,scales = 'free') + theme_pubr()+
-  xlim(c(-0.4,0.4)) + ylim(c(-0.4,0.4)) + labs(x="Folding + Binding Model",y="Binding-only Model",title='Model 3 vs. Model 2, Binding')
-a2<-ggplot(x1, aes(x=Model2F, y=Model1F)) + 
-  geom_point(alpha=0.05,shape=1,size=2,col='black')+
-  geom_abline(slope=0, intercept=0, lty=2, size=1, col='#9D9E9A') + 
-  geom_vline(xintercept = 0, lty=2, size=1, col='#9D9E9A')+
-  geom_abline(slope=1, intercept=0, lty=2, size=1, col='#9D9E9A') + 
-  stat_cor(method="pearson",digits =3) + facet_wrap(.~Type,ncol=1,scales = 'free') + theme_pubr()+
-  xlim(c(-0.4,0.4)) + ylim(c(-0.4,0.4)) + labs(x="Folding + Binding Model",y="Folding-only Model",title='Model 1 vs. Model 2, Folding')
-ggarrange(a1,a2, ncol=2, nrow=1)
-ggsave(file='Scatter plot Interaction comparison Model 1 vs. 2 vs. 3.pdf',width = 6.35, height =6.8)
+#ggsave(file='Model 2 Proportion Plot Allele Fraction.pdf', width = 15, height =25.3)
 
 
 ##### Figure 5, for Non-linearity and Linearity comparison in Model 1
@@ -400,7 +326,7 @@ ggplot(x1) + geom_vline(xintercept=1, lty=2, size=1, col='gray') +
   geom_line(aes(x=Pro, y=`Phenotype (A.U.)`), size=1) + 
   facet_wrap(.~DataType, scales="free_y",ncol=4) + theme_pubr() + ylim(0,1) + xlim(0,1) + 
   labs(x="Folded protein (A.U.)",title='Linear and nonlinear curves')
-ggsave(file='Line Plot Linearity and Nonlinearity.pdf', width = 10.1, height =3.1)
+#ggsave(file='Line Plot Linearity and Nonlinearity.pdf', width = 10.1, height =3.1)
 
 ### Model 1 comparison nonlinear
 x1<-list()
@@ -433,7 +359,7 @@ for (i in 1:3) {
     theme(legend.position="right")
 }
 ggarrange(f1[[1]],f1[[2]],f1[[3]], ncol=1, nrow=3)
-ggsave(file='Model 1 Heatmap Interaction comparison with Nonlinearity.pdf', width = 9.3, height =13)
+#ggsave(file='Model 1 Heatmap Interaction comparison with Nonlinearity.pdf', width = 9.3, height =13)
 
 ### Model 1 interaction shift with nonlinearity
 ### We select dGF_wt = -2 kcal/mol to continue
@@ -458,7 +384,7 @@ ggplot(x2, aes(x=Value, y=`Mutant type`, lty=DataType, fill=DataType)) +
   facet_grid(group~Downstream) + theme_pubr() + xlim(c(-0.9,0.9)) +
   annotate(geom='segment', y=Inf, yend=-Inf, color='black', x=Inf, xend=Inf) + 
   labs(x='Interaction with additive expectation', y='Density', title='Model 1 interaction shift') + theme(legend.position="top")
-ggsave(file='Model 1 Density plot Interaction shift.pdf', width = 11, height =5)
+#ggsave(file='Model 1 Density plot Interaction shift.pdf', width = 11, height =5)
 
 ###Model 1 Interaction comparison Scatter (with nonlinearities)
 x1<-list()
@@ -504,10 +430,10 @@ a3<-ggplot(x1, aes(x=Between_after, y=Within_after)) +
   labs(x='Between-allele Interaction', y='Within-allele Interaction', 
        title='Model 1 Interaction comparison (Between vs. Within)')
 ggarrange(a1,a2,a3, ncol=1, nrow=3)
-ggsave(file='Model 1 Scatter plot Interaction comparison with Nonlinearity.pdf',width = 9.2, height =10.8)
+#ggsave(file='Model 1 Scatter plot Interaction comparison with Nonlinearity.pdf',width = 9.2, height =10.8)
 
 
-##### Supplementary Figure 6, for Non-linearity and Linearity comparison in Model 2
+##### Supplementary Figure 5, for Non-linearity and Linearity comparison in Model 2
 
 ### Model 2 comparison nonlinear
 ### We select ligand = 1.1 to plot
@@ -532,7 +458,7 @@ ggplot(x1[x1$DataType=="Between alleles" | x1$DataType=="Within allele", ]) +
   geom_contour(aes(x=mut1_wt, y=mut2_wt, z=Value, colour=..level..), colour="black", binwidth=0.05) + 
   labs(x="(A) Phenotype (A.U.)", y="(B) Phenotype (A.U.)", fill="Interaction",
        title = "Model 2 Interaction with Nonlinearity, Ligand = 1.1") + theme(legend.position="right")
-ggsave(file='Model 2 Heatmap Interaction comparison with Nonlinearity.pdf', width = 8.5, height =7.35)
+#ggsave(file='Model 2 Heatmap Interaction comparison with Nonlinearity.pdf', width = 8.5, height =7.35)
 
 ### Model 2 interaction shift with nonlinearity
 x1$DataType<-as.character(x1$DataType) # Remove the information of ranking
@@ -558,7 +484,7 @@ ggplot(x1, aes(x=Value, y=group, lty=DataType, fill=`Mutation type`, alpha=DataT
   annotate(geom='segment', y=Inf, yend=-Inf, color='black', x=Inf, xend=Inf) + 
   labs(x='Interaction with additive expectation', y='Density', title='Model 2 interaction shift') + 
   theme(legend.position="top") + guides(fill=guide_legend(override.aes=list(alpha=c(0.5,0.5))))
-ggsave(file='Model 2 Density plot Interaction shift.pdf', width = 10, height =8)
+#ggsave(file='Model 2 Density plot Interaction shift.pdf', width = 10, height =8)
 
 ###Model 2 Interaction comparison Scatter (with nonlinearities)
 x1<-list()
@@ -612,106 +538,6 @@ for (i in 1:2) {
   f1[[i]]<-ggarrange(a1,a2,a3, ncol=1, nrow=3)
 }
 f1[[1]]
-ggsave(file='Model 2 Scatter plot Folding Interaction comparison with Nonlinearity.pdf',width = 9.2, height =10.8)
+#ggsave(file='Model 2 Scatter plot Folding Interaction comparison with Nonlinearity.pdf',width = 9.2, height =10.8)
 f1[[2]]
-ggsave(file='Model 2 Scatter plot Binding Interaction comparison with Nonlinearity.pdf',width = 9.2, height =10.8)
-
-
-##### Supplementary Figure 7, for Non-linearity and Linearity comparison in Model 3
-
-###Model 3 comparison nonlinear
-### We select ligand = 1.1 to plot
-x1<-list()
-for (k in 1:4) {
-  x1[[k]]<-All_model[[1]][[3]][[k]]
-  # Set upper and lower limits for data 
-  x1[[k]]<-x1[[k]][(x1[[k]]$mut1_wt>=0.69 & x1[[k]]$mut1_wt<=1) & 
-                     (x1[[k]]$mut2_wt>=0.69 & x1[[k]]$mut2_wt<=1), c(5:7,9,10)]
-  names(x1[[k]])[4]="Between alleles" # Give it a new column name
-  names(x1[[k]])[5]="Within allele" # Give it a new column name
-  x1[[k]]$Downstream=names(Nonlinearities)[[k]] # Create a new column to mark the data
-  x1[[k]]<-gather(x1[[k]],"DataType","Value",4:5) # Modify the format of the data
-}
-x1<-rbind(x1[[1]],x1[[2]],x1[[3]],x1[[4]]) # Merge the data
-x1$Downstream<-factor(x1$Downstream,levels = c("Linear","Concave","Convex","Sigmoidal")) # Rank the characters
-x1$DataType<-factor(x1$DataType,levels = c("Within allele","Between alleles"))
-
-### Model 3, wild-type default binding energy dG_Binding_wt = -5 kcal/mol, ligand amount = 1.1 A.U.
-ggplot(x1[x1$DataType=="Between alleles" | x1$DataType=="Within allele", ]) + 
-  geom_tile(aes(x=mut1_wt, y=mut2_wt, fill= Value))+ 
-  scale_fill_gradient2(low=scales::muted("blue"), mid="#EEEEEE", high=("hotpink")) + 
-  facet_grid(DataType~Downstream) + theme_pubr() + 
-  geom_contour(aes(x=mut1_wt, y=mut2_wt, z=Value, colour=..level..), colour="black", binwidth=0.05) + 
-  labs(x="(A) Phenotype (A.U.)", y="(B) Phenotype (A.U.)", fill="Interaction",
-       title = "Model 3 Interaction with Nonlinearity") + 
-  theme(legend.position="right")
-ggsave(file='Model 3 Heatmap Interaction comparison with Nonlinearity.pdf', width = 8.5, height =4.3)
-
-### Model 3 interaction shift with nonlinearity
-x1$group=x1$DataType # Modify the content of the column
-x1$DataType<-as.character(x1$DataType) # Remove the information of ranking
-x1[5][x1$Downstream!="Linear" & x1$DataType=="Between alleles",]="Between after" # Modify the character
-x1[5][x1$Downstream!="Linear" & x1$DataType=="Within allele",]="Within after" # Modify the character
-x2<-list()
-for (i in 1:4) {
-  x2[[i]]<-x1[x1$Downstream==names(Nonlinearities)[[i]],] # Separate the data according to different nonlinearity
-  x2[[i]]<-rbind(x2[[i]],x2[[1]]) # Merge the linear and non-linear data
-  x2[[i]]$Downstream=names(Nonlinearities)[[i]] # Remodify the content of the column
-}
-x1<-rbind(x2[[2]],x2[[3]],x2[[4]]) # Only merge the nonlinearity data
-x1$group<-factor(x1$group,levels = c("Within allele","Between alleles")) # Rank the group
-ggplot(x1, aes(x=Value, y=`Mutant type`, lty=DataType, fill=DataType)) + 
-  geom_density_ridges(stat="binline", bins=35, panel_scaling=FALSE) + 
-  geom_vline(xintercept=0, col='gray') + 
-  scale_fill_manual(values=alpha(c("#6633CC","#6633CC","#6633CC","#6633CC"),c(0.5,0,0.5,0))) + 
-  scale_linetype_manual(values=c("solid","dashed","solid","dashed")) + 
-  facet_grid(group~Downstream) + theme_pubr() + xlim(c(-0.9,0.9)) +
-  annotate(geom='segment', y=Inf, yend=-Inf, color='black', x=Inf, xend=Inf) + 
-  labs(x='Interaction with additive expectation', y='Density', title='Model 3 interaction shift') + theme(legend.position="top")
-ggsave(file='Model 3 Density plot Interaction shift.pdf', width = 11, height =5)
-
-###Model 3 Interaction comparison Scatter (with nonlinearities)
-x1<-list()
-for (i in 1:4) {
-  x1[[i]]<-All_model[[1]][[3]][[i]]
-  x1[[i]]<-x1[[i]][x1[[i]]$mut1_wt>=0.69 & x1[[i]]$mut2_wt>=0.69 & 
-                     x1[[i]]$mut1_wt<=1 & x1[[i]]$mut2_wt<=1, c(9,10)]
-  names(x1[[i]])[1]="Between_after"
-  names(x1[[i]])[2]="Within_after"
-  x1[[i]]$Between_before = x1[[1]]$Between_after
-  x1[[i]]$Within_before = x1[[1]]$Within_after
-  x1[[i]]$Downstream=names(Nonlinearities)[[i]]
-}
-x1<-rbind(x1[[2]],x1[[3]],x1[[4]])
-a1<-ggplot(x1, aes(x=Within_before, y=Within_after)) + 
-  geom_point(alpha=0.03,shape=1,size=2,col='black')+
-  geom_abline(slope=0, intercept=0, lty=2, size=1, col='#9D9E9A') + 
-  geom_vline(xintercept = 0, lty=2, size=1, col='#9D9E9A')+
-  geom_abline(slope=1, intercept=0, lty=2, size=1, col='#9D9E9A') + 
-  stat_cor(method="pearson",digits=3)+
-  facet_wrap(.~Downstream, ncol=3, scales = 'free') + 
-  theme_pubr()+ xlim(c(-0.9,0.9)) + ylim(c(-0.9,0.9)) +  
-  labs(x='Within-allele Interaction (before)', y='Within-allele Interaction (after)', 
-       title='Model 3 Interaction comparison (Within-allele)')
-a2<-ggplot(x1, aes(x=Between_before, y=Between_after)) + 
-  geom_point(alpha=0.03,shape=1,size=2,col='black')+
-  geom_abline(slope=0, intercept=0, lty=2, size=1, col='#9D9E9A') + 
-  geom_vline(xintercept = 0, lty=2, size=1, col='#9D9E9A')+
-  geom_abline(slope=1, intercept=0, lty=2, size=1, col='#9D9E9A') + 
-  stat_cor(method="pearson",digits=3)+
-  facet_wrap(.~Downstream, ncol=3, scales = 'free') + 
-  theme_pubr()+ xlim(c(-0.9,0.9)) + ylim(c(-0.9,0.9)) +  
-  labs(x='Between-allele Interaction (before)', y='Between-allele Interaction (after)', 
-       title='Model 3 Interaction comparison (Between-allele)')
-a3<-ggplot(x1, aes(x=Between_after, y=Within_after)) + 
-  geom_point(alpha=0.03,shape=1,size=2,col='black')+
-  geom_abline(slope=0, intercept=0, lty=2, size=1, col='#9D9E9A') + 
-  geom_vline(xintercept = 0, lty=2, size=1, col='#9D9E9A')+
-  geom_abline(slope=1, intercept=0, lty=2, size=1, col='#9D9E9A') + 
-  stat_cor(method="pearson",digits=3)+
-  facet_wrap(.~Downstream, ncol=3, scales = 'free') + 
-  theme_pubr()+ xlim(c(-0.9,0.9)) + ylim(c(-0.9,0.9)) +  
-  labs(x='Between-allele Interaction', y='Within-allele Interaction', 
-       title='Model 3 Interaction comparison (Between vs. Within)')
-ggarrange(a1,a2,a3, ncol=1, nrow=3)
-ggsave(file='Model 3 Scatter plot Interaction comparison with Nonlinearity.pdf',width = 9.2, height =10.8)
+#ggsave(file='Model 2 Scatter plot Binding Interaction comparison with Nonlinearity.pdf',width = 9.2, height =10.8)

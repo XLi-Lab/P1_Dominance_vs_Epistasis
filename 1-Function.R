@@ -76,42 +76,8 @@ Fold_Bind<- function(deltadeltaG_Fold1, deltadeltaG_Bind1,
   return(components[1]/pr1 + components[2]/pr1) #Relative protein expression
 }
 
-### Model 3 (Binding only model)
-Binding_only<- function(deltadeltaG_Fold1, deltadeltaG_Bind1,
-                        deltadeltaG_Fold2, deltadeltaG_Bind2, pr2){ 
-  pr1=1.1 #Total protein expression level
-  #pr2=11, 2.2, 1.1, 0.88, 0.55 #Total ligand amount
-  R= 1.98*10^(-3) # kcal/mol
-  Temp= 310.15 #Temperature, the unit is K
-  deltaG_Bind_wt = -5 #Wild type default Binding energy change
-  deltaG_Bind1 = deltaG_Bind_wt + deltadeltaG_Bind1 #for complex from allele1
-  deltaG_Bind2 = deltaG_Bind_wt + deltadeltaG_Bind2 #for complex from allele2
-  k1= exp(-deltaG_Bind1/(R*Temp))
-  k2= exp(-deltaG_Bind2/(R*Temp))
-  ### 5 unknowns and 5 equations:
-  #XB1(x1),XB2(x2),XM1(x3),XM2(x4),L(x5)
-  #eq.1, XU1+XM1=pr1*0.5
-  #eq.2, XU2+XM2=pr1*0.5
-  #eq.3, XB1+XB2+L=pr2
-  #eq.4, XM1*L*k1=XB1
-  #eq.5, XM2*L*k2=XB2
-  require(rootSolve)
-  dslnex <- function(x) {
-    y <- numeric(5)
-    y[1] <- x[1]+x[3]-pr1*0.5
-    y[2] <- x[2]+x[4]-pr1*0.5
-    y[3] <- x[1]+x[2]+x[5]-pr2
-    y[4] <- x[3]*x[5]*k1-x[1] 
-    y[5] <- x[4]*x[5]*k2-x[2] 
-    y
-  } 
-  xstart <- c(0.4,0.4,0.1,0.1,0.1 )
-  components= multiroot( dslnex, start=xstart, positive = TRUE, rtol=1e-9,atol= 1e-9, ctol= 1e-9)$root 
-  return(components[1]/pr1 + components[2]/pr1) #Relative protein expression
-}
-
-### Put the three models into a list
-Model_list<-list(`Model 1`=Folding_only,`Model 2`=Fold_Bind,`Model 3`=Binding_only) 
+### Put the two models into a list
+Model_list<-list(`Model 1`=Folding_only,`Model 2`=Fold_Bind) 
 
 ### Other alternative functions for FL system
 ### FL with pr1-pr2 change system
@@ -217,7 +183,7 @@ source('2-Parameter_and_WT.R')
 ### The functions of calculating the phenotype before adding nonlinearity by the phenotype after adding nonlinearity
 ### m=1~3, represent the Model 1 - Model 3; i=1~4, represent the different parameters in the models
 Nonlinear_ver_All<-list()
-for (m in 1:3) {
+for (m in 1:2) {
   for (i in 1:4) {
     data_save[[i]]<-list(
       #The same as Linear function
@@ -328,44 +294,11 @@ for (i in 1:4) {
     return(ddGB)
   }
 }
-### It is no sense. Only for facilitating the code running
-M3_F<-list()
-for (i in 1:4) {
-  M3_F[[i]]<-function(W){
-    wt=Model_list[[3]](0,0,0,0,para_All[[3]][[i]])
-    pr1=1.1
-    pr2=para_All[[3]][[i]]
-    R= 1.98*10^(-3)
-    Temp= 310.15
-    dGB_wt=-5
-    k2=exp(-dGB_wt/(R*Temp))
-    B=pr2-pr1*W*wt
-    U1B=(pr1*W*wt-k2*B*(0.5*pr1-pr1*W*wt))/(k2*pr2-k2*pr1*W*wt+1)
-    ddGB=log((k2*B*(0.5*pr1-U1B))/U1B)*(R*Temp)
-    return(ddGB)
-  }
-}
-###Model 3, solve ddGB (mutant Binding energy change, relative to wild type)
-M3_B<-list()
-for (i in 1:4) {
-  M3_B[[i]]<-function(W){
-    wt=Model_list[[3]](0,0,0,0,para_All[[3]][[i]])
-    pr1=1.1 # Total protein expression level
-    pr2=para_All[[3]][[i]] # Total ligand amount
-    R= 1.98*10^(-3) # kcal/mol
-    Temp= 310.15 # Temperature, the unit is K 
-    dGB_wt=-5 # Wild type default Binding energy change
-    k2=exp(-dGB_wt/(R*Temp))
-    L=pr2-pr1*W*wt
-    U1L=(pr1*W*wt-k2*L*(0.5*pr1-pr1*W*wt))/(k2*pr2-k2*pr1*W*wt+1)
-    ddGB=log((k2*L*(0.5*pr1-U1L))/U1L)*(R*Temp)
-    return(ddGB)
-  }
-}
+
 
 ### Put the above inverse operation models into a list
-Model_ver_All<-list(M1_F,M1_B,M2_F,M2_B,M3_F,M3_B)
-for (m in 1:3) {
+Model_ver_All<-list(M1_F,M1_B,M2_F,M2_B)
+for (m in 1:2) {
   names(Model_ver_All)[[2*m-1]]=paste(names(Model_list)[[m]],"ddGF")
   names(Model_ver_All)[[2*m]]=paste(names(Model_list)[[m]],"ddGB")
   for (i in 1:4) {
