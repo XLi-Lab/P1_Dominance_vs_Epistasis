@@ -1,5 +1,5 @@
 #setwd('~/dir/')
-setwd("D:/xx_Rcode/Code_file/")
+setwd("D:/xx_Rcode/Interaction_20220307/")
 
 library(tidyr)
 
@@ -287,12 +287,12 @@ data_1<-rbind(data.frame(data_1,pr2=0.88),data.frame(data_1,pr2=1.1),data.frame(
 data_1$wt<-apply(data_1,1,function(v){Fold_Bind(0,0,0,0,v[4])}) # Calculate the wild type phenotype
 data_1$`(A,A)`<-apply(data_1,1,function(v){Fold_Bind(v[1],v[2],v[1],v[2],v[4])}) # Calculate the homozygote phenotype
 data_1$`(A,wt)`<-apply(data_1,1,function(v){Fold_Bind(v[1],v[2],0,0,v[4])}) # Calculate the heterozygote phenotype
-data_2<-gather(data_1[data_1$type==2,c(2:7)],"DataType","Phenotype (A.U.)",5:6)
-data_1<-gather(data_1[data_1$type==1,c(1,3:7)],"DataType","Phenotype (A.U.)",5:6)
+data_2<-gather(data_1[data_1$type==2,c(2:7)],"DataType","Phenotype (AU)",5:6)
+data_1<-gather(data_1[data_1$type==1,c(1,3:7)],"DataType","Phenotype (AU)",5:6)
 colnames(data_2)=colnames(data_1)
 data_1<-rbind(data_1,data_2)
 data_1$pr2<-data_1$pr2/1.1
-data_1$`Phenotype (A.U.)`<-data_1$`Phenotype (A.U.)`/data_1$wt
+data_1$`Phenotype (AU)`<-data_1$`Phenotype (AU)`/data_1$wt
 data_1$DataType<-factor(data_1$DataType,levels = c("(A,A)","(A,wt)"))
 data_1[2][data_1$type==1,]="Folding"
 data_1[2][data_1$type==2,]="Binding"
@@ -369,3 +369,4 @@ names(All_model)[[6]]="Sup_M2_ProportionPlot"
 
 ##### Save the total data
 save(All_model, file = "All_model.Rdata")
+

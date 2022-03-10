@@ -1,5 +1,5 @@
 #setwd('~/dir/')
-setwd("D:/xx_Rcode/Code_file/")
+setwd("D:/xx_Rcode/Interaction_20220307/")
 
 ### Model 1 (Protein Folding)
 Folding_only<- function(deltadeltaG_Fold1, deltadeltaG_Bind1,
@@ -307,3 +307,15 @@ for (m in 1:2) {
   }
 }
 
+
+### For setting the lower panels of correlogram figure
+
+Setting_lower <- function(data, mapping, ...) { 
+  ggplot(data = data, mapping = mapping, ...) + 
+    geom_point(size=0.8,alpha=0.1) + 
+    geom_vline(xintercept = 0,col='gray',lty=2) +
+    geom_abline(slope = 1,intercept = 0,col='gray',lty=2) +
+    geom_abline(slope = 0,intercept = 0,col='gray',lty=2) +
+    scale_y_continuous(limits = c(-0.5, 0.5)) +
+    scale_x_continuous(limits = c(-0.5, 0.5))
+}

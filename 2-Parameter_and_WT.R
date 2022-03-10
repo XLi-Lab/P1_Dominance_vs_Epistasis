@@ -1,5 +1,5 @@
 #setwd('~/dir/')
-setwd("D:/xx_Rcode/Code_file/")
+setwd("D:/xx_Rcode/Interaction_20220307/")
 
 ### Setting the different parameters used in Model 1 - Model 2
 para_dGF_wt<-list(-3.5,-2,-0.5,0) # Set the different wild type default folding energy change, setting '0' only for facilitating the code running
