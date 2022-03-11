@@ -561,18 +561,20 @@ d1$group=paste(d1$`Mutant type`,d1$group)
 ggpairs(d1[d1$DataType=="Between-allele Interaction",], columns = c(3,5:7),
         lower = list(continuous = Setting_lower),
         diag = list(continuous = wrap(ggally_densityDiag, alpha=0.7,size=0.2)),
-        title="Model 2 Between-allele with different L:P ratios (ddG scale)", ggplot2::aes(colour=group))+
+        title="Model 2. With evenly distributed ddG values (Between-allele)", ggplot2::aes(colour=group))+
   scale_fill_manual(values = cor_Palette)+
   scale_color_manual(values = cor_Palette)+
+  labs(x='Interaction score', y='Interaction score')+
   theme_bw()+theme(panel.grid.major=element_line(colour=NA),panel.grid.minor = element_blank())
 #ggsave(file='Model 2 Correlogram Between-allele with different L-P ratios (ddG scale).pdf',width = 10, height =10)
 
 ggpairs(d1[d1$DataType=="Within-allele Interaction",], columns = c(3,5:7),
         lower = list(continuous = Setting_lower),
         diag = list(continuous = wrap(ggally_densityDiag, alpha=0.7,size=0.2)),
-        title="Model 2 Within-allele with different L:P ratios (ddG scale)",ggplot2::aes(colour=group))+
+        title="Model 2. With evenly distributed ddG values (Within-allele)",ggplot2::aes(colour=group))+
   scale_fill_manual(values = cor_Palette)+
   scale_color_manual(values = cor_Palette)+
+  labs(x='Interaction score', y='Interaction score')+
   theme_bw()+theme(panel.grid.major=element_line(colour=NA),panel.grid.minor = element_blank())
 #ggsave(file='Model 2 Correlogram Within-allele with different L-P ratios (ddG scale).pdf',width = 10, height =10)
 
@@ -591,18 +593,20 @@ d1$group=paste(d1$`Mutant type`,d1$group)
 ggpairs(d1[d1$DataType=="Between-allele Interaction",], columns = c(3,5:7),
         lower = list(continuous = Setting_lower),
         diag = list(continuous = wrap(ggally_densityDiag, alpha=0.7,size=0.2)),
-        title="Model 2 Between-allele with different L:P ratios (Phe scale)",ggplot2::aes(colour=group))+
+        title="Model 2. With evenly distributed phenotype values (Between-allele)",ggplot2::aes(colour=group))+
   scale_fill_manual(values = cor_Palette)+
   scale_color_manual(values = cor_Palette)+
+  labs(x='Interaction score', y='Interaction score')+
   theme_bw()+theme(panel.grid.major=element_line(colour=NA),panel.grid.minor = element_blank())
 #ggsave(file='Model 2 Correlogram Between-allele with different L-P ratios (Phe scale).pdf',width = 10, height =10)
 
 ggpairs(d1[d1$DataType=="Within-allele Interaction",], columns = c(3,5:7),
         lower = list(continuous = Setting_lower),
         diag = list(continuous = wrap(ggally_densityDiag, alpha=0.7,size=0.2)),
-        title="Model 2 Within-allele with different L:P ratios (Phe scale)",ggplot2::aes(colour=group))+
+        title="Model 2. With evenly distributed phenotype values (Within-allele)",ggplot2::aes(colour=group))+
   scale_fill_manual(values = cor_Palette)+
   scale_color_manual(values = cor_Palette)+
+  labs(x='Interaction score', y='Interaction score')+
   theme_bw()+theme(panel.grid.major=element_line(colour=NA),panel.grid.minor = element_blank())
 #ggsave(file='Model 2 Correlogram Within-allele with different L-P ratios (Phe scale).pdf',width = 10, height =10)
 
