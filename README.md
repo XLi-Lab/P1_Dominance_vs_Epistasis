@@ -1,6 +1,8 @@
 # P1_Domiance_vs_Epistasis
-## This repository contains codes for generating the mathematical models and plots for the manuscript "Dominance vs. epistasis: the biophysical origins and plasticity of genetic interactions within and between alleles"
+## This repository contains codes for generating the mathematical models and plots for the manuscript: "Dominance vs. epistasis: the biophysical origins and plasticity of genetic interactions within and between alleles"
 
+### Authors: Xuan Xie1, Ben Lehner2-4*, Xianghua Li1, 5, 6* 
+### * Correspondence: ben.lehner@crg.eu and xianghuali@intl.zju.edu.cn
 
 The codes can be run in the order of : "1-Function.R", "2-Parameter_and_WT.R","3-Make_dataframe.R","4-Figure.R".
 ## 1-Function.R 
