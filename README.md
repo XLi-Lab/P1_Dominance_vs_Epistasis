@@ -15,7 +15,7 @@ It contains the parameters applied to the models.
 It contains all the codes to simulate and generate dataframes for plotting the data. This code also includes the fuctions and parameters defined in "Function.R" and "Parameter_and_WT.R" for a quick analysis. 
 
 ## 4-Figure.R
-It contains all the code used to generate figures.
+It contains all the code used to generate figures. If you have successfully unzipped the "All_model.Rdata", you don't need to run "3-Make_dataframe.R" for waiting a long time to generate data. You can directly run "4-Figure.R" to generate pictures.
 
 
 
