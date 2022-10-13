@@ -1,4 +1,4 @@
-setwd('D:/流式实验分析/')
+#setwd('D:/')
 
 library(flowCore) # for read.FCS
 library(ggplot2)
