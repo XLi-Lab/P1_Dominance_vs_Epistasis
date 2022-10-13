@@ -369,7 +369,7 @@ Obs_vs_Exp_mat$interact_SE=sqrt(Obs_vs_Exp_mat$Obs_SE^2+Obs_vs_Exp_mat$Exp_SE^2)
 Obs_vs_Exp_mat<-Obs_vs_Exp_mat[Obs_vs_Exp_mat$a_type==">12a" & !is.na(Obs_vs_Exp_mat$Obs),]
 
 ### Output the data sheet
-write.csv(Obs_vs_Exp_mat[Obs_vs_Exp_mat$Exp_type=="add",],"20221012_mut_remain.csv")
+write.csv(Obs_vs_Exp_mat,"20221012_mut_remain.csv")
 
 #-------------------------------------------------------Plotting------------------------------------------------------
 
@@ -390,7 +390,7 @@ ggplot() +
   #ggrepel::geom_text_repel(data=Obs_vs_Exp_mat[Obs_vs_Exp_mat$mut_type=="Double",],aes(x=Exp,y=Obs,label=mut_name),show.legend = FALSE, max.overlaps = 100) +
   theme_pubr() + xlim(c(0,2)) + ylim(c(0,2)) + theme(legend.position="right",aspect.ratio=1)
 
-ggsave(file='Observed vs. Expected Calpha distance 12a.pdf',width = 8, height =7)
+ggsave(file='Model A Observed vs. Expected Ca_dis 12a.pdf',width = 8, height =7)
 
 #-------------------------------------Observed XX_2022 vs. XLi_2019 Total Single Double------------------------------------------
 
@@ -408,7 +408,7 @@ ggplot() +
   xlim(c(0,1.5)) + ylim(c(0,1.5)) + facet_grid(.~model,labeller=labeller(model = c('A'='Model A','B'='Model B'))) + 
   theme_pubr() + theme(legend.position="right",aspect.ratio=1)
 
-ggsave(file='Observed XX_2022 vs. XLi_2019 Single Double.pdf',width = 5, height =4)
+ggsave(file='Model A Observed XX_2022 vs. XLi_2019 Single Double.pdf',width = 5, height =4)
 
 #---------------------------------------------------Interaction shift-------------------------------------------------
 
@@ -418,7 +418,7 @@ ggplot(Obs_vs_Exp_mat[Obs_vs_Exp_mat$a_type==">12a" & Obs_vs_Exp_mat$Exp_type=="
   facet_grid(Obs_type~Exp_type,labeller=labeller(Obs_type = c('Within'='Within allele','Between'='Between allelels'),Exp_type = c('add'='Additive'))) + 
   theme_pubr() + xlim(c(-1.2,1.2)) + labs(x='Interaction with additive expectation', y='Density', title='Model A Interaction distribution Calpha >12a')
 
-ggsave(file='Model A Interaction distribution Calpha 12a.pdf',width = 6, height =4)
+ggsave(file='Model A Interaction distribution Ca_dis 12a.pdf',width = 6, height =4)
 
 #-----------------------------------------------------Density plot------------------------------------------------------
 
@@ -538,4 +538,29 @@ for (j in 1:4) {
     }
   }
 }
+
+#-----------------------------------------Additive vs. Log-additive--------------------------------------------------
+
+Add_vs_log<-spread(Obs_vs_Exp_mat[Obs_vs_Exp_mat$mut_type=="Double",],Exp_type, Exp)
+Add_vs_log$log_SE=1
+Add_vs_log[!is.na(Add_vs_log$add),]$log_SE=Add_vs_log[!is.na(Add_vs_log$log_add),]$Exp_SE
+colnames(Add_vs_log)[15]="add_SE"
+Add_vs_log[!is.na(Add_vs_log$add),]$log_add=Add_vs_log[!is.na(Add_vs_log$log_add),]$log_add
+Add_vs_log<-Add_vs_log[!is.na(Add_vs_log$add),]
+
+ggplot() + 
+  geom_abline(slope=1, intercept=0, lty=2, size=1, col='gray') + 
+  geom_abline(slope=0, intercept=1, lty=2, size=1, col='gray') + 
+  geom_vline(xintercept = 1, lty=2, size=1, col='gray') + 
+  geom_errorbar(data=Add_vs_log[Add_vs_log$mut_type=="Double",],aes(x=add,y=log_add, ymax=log_add+log_SE, ymin=log_add-log_SE),col='gray')+
+  geom_errorbarh(data=Add_vs_log[Add_vs_log$mut_type=="Double",],aes(x=add,y=log_add, xmax=add+add_SE, xmin=add-add_SE),col='gray')+
+  geom_point(data=Add_vs_log[Add_vs_log$mut_type=="Double",],aes(x=add,y=log_add, shape=feat),size=2.5, alpha=0.6)+ 
+  stat_cor(data=Add_vs_log[Add_vs_log$mut_type=="Double",],aes(x=add,y=log_add),method="pearson",digits =3,cor.coef.name = c("Pearson"))+
+  labs(x="Expected additive phenotype (A.U.)",y="Expected log-additive phenotype (A.U.)",
+       title="Model A Expected add vs. log >12a") +
+  facet_grid(Obs_type~mut_type,labeller=labeller(Obs_type = c('Within'='Within allele','Between'='Between alleles'))) + 
+  #ggrepel::geom_text_repel(data=Add_vs_log[Add_vs_log$mut_type=="Double",],aes(x=add,y=log_add,label=mut_name),show.legend = FALSE, max.overlaps = 100) +
+  theme_pubr() + xlim(c(0,2)) + ylim(c(0,2)) + theme(legend.position="right",aspect.ratio=1)
+
+ggsave(file='Model A Expected add vs. log Ca_dis 12a.pdf',width = 5, height =7)
 
